@@ -72,3 +72,5 @@ ERROR - 2017-08-21 13:08:32 --> Severity: Warning --> fopen(C:/Users/Public/Docu
 ERROR - 2017-08-21 13:08:32 --> Severity: Warning --> fseek() expects parameter 1 to be resource, boolean given F:\xamp_new\htdocs\SMF2020\application\controllers\smart_controller.php 200
 ERROR - 2017-08-21 13:08:32 --> Severity: Warning --> fscanf() expects parameter 1 to be resource, boolean given F:\xamp_new\htdocs\SMF2020\application\controllers\smart_controller.php 203
 ERROR - 2017-08-21 13:08:32 --> Severity: Warning --> fclose() expects parameter 1 to be resource, boolean given F:\xamp_new\htdocs\SMF2020\application\controllers\smart_controller.php 213
+ERROR - 2017-08-21 13:55:36 --> Severity: 8192 --> Function mcrypt_encrypt() is deprecated D:\xampp\htdocs\ZmartF2020\trunk\SMF2020\application\controllers\smart_controller.php 910
+ERROR - 2017-08-21 14:02:50 --> Severity: error --> Exception: Call to undefined function read_file() D:\xampp\htdocs\ZmartF2020\trunk\SMF2020\application\controllers\smart_controller.php 192

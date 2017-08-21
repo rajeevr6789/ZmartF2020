@@ -189,7 +189,7 @@ class Smart_Controller extends CI_Controller {
 		 //$y = mt_rand()/10000000;
 		//echo $y;
 		 //echo json_encode($y);
-		 //$string = read_file('./path/to/file.php');
+	//$handle = read_file('C:/Users/Public/Documents/datafile.txt');
 		 	// Set the JSON header
 	//header("Content-type: text/json");
 	

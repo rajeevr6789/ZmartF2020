@@ -41,9 +41,9 @@
     <link href="<?php echo base_url();?>/assets/css/daterangepicker.css" rel="stylesheet">
 	
 	<!-- PNotify -->
-    <link href="<?php echo base_url();?>/assets/css/pnotify.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>/assets/css/pnotify.buttons.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>/assets/css/pnotify.nonblock.css" rel="stylesheet">
+   <!-- <link href="<?php echo base_url();?>/assets/css/pnotify.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>/assets/css/pnotify.buttons.css" rel="stylesheet">-->
+   <!-- <link href="<?php //echo base_url();?>/assets/css/pnotify.nonblock.css" rel="stylesheet">-->
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url();?>/assets/css/custom.css" rel="stylesheet">

@@ -57,9 +57,9 @@
     <!-- starrr -->
     <script src="<?php echo base_url();?>/assets/js/starrr.js"></script>
 	<!-- PNotify -->
-    <script src="<?php echo base_url();?>/assets/js/pnotify.js"></script>
-    <script src="<?php echo base_url();?>/assets/js/pnotify.buttons.js"></script>
-    <script src="<?php echo base_url();?>/assets/js/pnotify.nonblock.js"></script>
+    <!--<script src="<?php echo base_url();?>/assets/js/pnotify.js"></script>
+    <script src="<?php echo base_url();?>/assets/js/pnotify.buttons.js"></script>-->
+    <!--<script src="<?php echo base_url();?>/assets/js/pnotify.nonblock.js"></script>-->
 	
     <!-- Custom Theme Scripts -->
 	<!-- Custom script -->

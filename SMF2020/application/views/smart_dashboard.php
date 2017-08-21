@@ -118,7 +118,7 @@
 				var series = chart.series[0];//Setting up the series of points to put in the charts.
 			
 				<?php //date_default_timezone_set('Asia/Kolkata');?>;									
-				var x = (new Date()).getTime();//+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
+				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
 				var y = parseInt(point); // Setting up the y co-ordinate of the chart with point.
 				chart.series[0].addPoint([x, y], true, true); // Adding the [x,y] point to the chart
 				
@@ -141,7 +141,7 @@
 		{
 			chart: 
 			{
-				type: 'areaspline', // Setting the chart type as areaspline
+				type: 'spline', // Setting the chart type as spline
 				
 				animation: Highcharts.svg, // don't animate in old IE
 				marginRight: 10,
@@ -152,7 +152,7 @@
 			},
 			
 			title: {
-				text: 'Live random data'
+				text: 'Live data From File'
 			},
 			 credits: {
                 enabled:true,
@@ -194,7 +194,7 @@
 				{
 					// generate an array of random data
 					var data = [],
-						time = (new Date()).getTime(),
+						time = (new Date()).getTime()+ 330*60*1000,
 						i;
 	
 					for (i = -19; i <= 0; i += 1) 

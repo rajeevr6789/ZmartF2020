@@ -387,7 +387,9 @@ var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, 
             text: 'RPM'
         }
     },
-
+credits: {
+        enabled: false
+    },
     series: [{
         name: 'RPM',
         data: [1],

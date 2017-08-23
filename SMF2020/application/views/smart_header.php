@@ -55,6 +55,8 @@
 	<!-- Custom script -->
 	<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/assets/payloads/highcharts.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/assets/payloads/exporting.js"></script>
+	    <script src="<?php echo base_url();?>/assets/payloads/highcharts-more.js"></script>
+		<script src="<?php echo base_url();?>/assets/payloads/solid-gauge.js"></script>
 	
 	
   </head>
@@ -99,7 +101,7 @@
 					
                   </li>
 				  -->
-                  <li><a><i class="fa fa-edit"></i> View/Edit Values <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="<?php echo base_url();?>smart_controller/smart_procdes_form">><i class="fa fa-edit"></i> View/Edit Values <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.php">Proc. Design and Simulation</a></li>
                       <li><a href="form.php">3D Printing</a></li>

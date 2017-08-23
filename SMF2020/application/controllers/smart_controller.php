@@ -1,11 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Smart_Controller extends CI_Controller {
-	/* Newly defined
-	*/
 	
-	// private $module,$moduleID,$tablestudent,$tableteacher,$tableschool,$endrolled,$tableattend,$tableactivity,$tableslots;
-	 private $module,$smart_login_table,$moduleID,$tablestudent,$tableteacher,$tableschool,$endrolled,$tableattend,$tableactivity,$tableslots,$module_name,$logged_in,$tableclass,$brn_ass,$pass=1234,$test_val;
+ private $module,$smart_login_table,$moduleID,$tablestudent,$tableteacher,$tableschool,$endrolled,$tableattend,$tableactivity,$tableslots,$module_name,$logged_in,$tableclass,$brn_ass,$pass=1234,$test_val;
 	 
 	function __construct(){		
 		
@@ -35,39 +32,13 @@ class Smart_Controller extends CI_Controller {
 		*@ return view to admin/login.php
 	 */
 	 
-	function index(){
-		$pass=1234;
-		//Authentication
-		//if(!$this->quickauth->is_logged_in())
-		
-	if($pass==1234)
-		{
-			//$this->load->view('smart_login');
-			redirect(base_url('smart_controller/login'));
-		}
-		//if (! $this->session->userdata('status')){redirect(base_url('admin/login'));}
+	function index()
+	{
+
+			
+			redirect(base_url('smart_controller/smart_login'));
 		
 		
-		/*
-		//common for all functions
-		$admin_id					=	$this->quickauth->logged_in_user();
-		//echo $admin_id;die();
-        $header['admin_id']			=	$admin_id;		
-		$header['get_name']			=	$this->admin_model->get_admin_name($admin_id);		
-		$header['admin_name']		=	$header['get_name']['admin_name'];
-		$header['type']				=	$header['get_name']['type'];	
-		//echo $header['type'];die();
-        $total_msg					=	$this->admin_model->total_msg_count($admin_id,$header['type']);		
-		
-        $header['total_msg']		=	count($total_msg);		
-		$msg_tbl					=	'message';
-		$admin_tbl					=	'tbl_adminusers';				
-		$header['branch_admin_names']	=	$this->admin_model->show_names($admin_id,$admin_tbl,$msg_tbl,$header['type']);	
-		/*echo '<pre>';
-        print_r($header['branch_admin_names']);die();*/
-		/*$header['page']	=	"Dashboard";
-		$this->load->view('admin/home',$header);
-		*/
 	}
 	//------------------------------------------------------------
 	
@@ -112,7 +83,7 @@ class Smart_Controller extends CI_Controller {
 		
 		{
 			$this->session->set_flashdata('err', 'Invalid Username or Password');
-			redirect(base_url('smart_controller/login'));
+			redirect(base_url('smart_controller/smart_login'));
 				
 		}
 		else
@@ -133,7 +104,7 @@ class Smart_Controller extends CI_Controller {
 		*@ access admin
 		*@ return view to admin/home page
 	 */
-	function login()
+	function smart_login()
 	{ 
 		
 		//$errmessages			=	array();
@@ -153,7 +124,7 @@ class Smart_Controller extends CI_Controller {
 	 */
 	function smart_home()
 	{ 
-		if ($this->session->userdata('ses_status')==false)
+		if (!$this->session->userdata('ses_status'))
 		
 		{
 			$this->session->set_flashdata('err', 'Please Log in to continue');
@@ -166,14 +137,6 @@ class Smart_Controller extends CI_Controller {
 	}
 	
 	
-	//------------------------------------------------------------
-	 /**
-		*This function is used to recover_password
-		*@ access admin
-		*@ return view to admin/home page
-	 */
-	 
-	 //------------------------------------------------------------
 	 /**
 		*This function is used to get realtime values from a file
 		*@ access smart_controller
@@ -212,7 +175,61 @@ class Smart_Controller extends CI_Controller {
 
 	fclose($handle); //closing the required file from file_close.php file
 	}
+	
+	//------------------------------------------------------------
+	 /**
+		*This function is used to load Process design and simulation form
+		*@ access smart_controller
+		*@ return view to smart_dashboard/Smart Forms
+	 */
 	 
+	 	function add_student1($id=0){
+		
+		$admin_id					=	$this->quickauth->logged_in_user();
+		$header['admin_id']			=	$admin_id;		
+		$header['get_name']			=	$this->admin_model->get_admin_name($admin_id);		
+		$header['admin_name']		=	$header['get_name']['admin_name'];
+		$header['type']				=	$header['get_name']['type'];	
+		$total_msg					=	$this->admin_model->total_msg_count($admin_id,$header['type']);		
+		$header['total_msg']		=	count($total_msg);		
+		$msg_tbl					=	'message';
+		$admin_tbl					=	'tbl_adminusers';				
+		$header['branch_admin_names']	=	$this->admin_model->show_names($admin_id,$admin_tbl,$msg_tbl,$header['type']);
+		
+		//Authentication
+		if(!$this->quickauth->is_logged_in())
+		{
+			redirect(base_url('admin/login'));
+		}
+		$header['page']			=	"student";
+		$header['student']		=	array();
+		$header['school']		=	$this->admin_model->listAllschool($this->tableschool);
+		$header['enrolled']		=	$this->admin_model->listEnrolled($this->endrolled);
+		$header['sess']			=	$this->session->flashdata('err');
+		$header['day']			=	"";
+		$header['month']		=	"";
+		$header['year']			=	"";
+		
+		if($id) { 
+			$header['student']		=	$this->admin_model->studentByid($this->tablestudent,$id);
+			$dob					=	explode("-",$header['student'][0]['kid_dob']);
+			$header['year']			=	$dob[0];
+			$header['month']		=	$dob[1];
+			$header['day']			=	$dob[2];
+			}
+		$header['teacher']		=	$this->admin_model->getteacherBymodule($this->moduleID,$this->tableteacher);		
+		$this->load->view('add_student',$header);
+	}
+	 
+	 
+	//------------------------------------------------------------
+	 /**
+		*This function is used to recover_password
+		*@ access admin
+		*@ return view to admin/home page
+	 */
+	 
+	 //------------------------------------------------------------
 	 
 	 
 	 
@@ -392,7 +409,7 @@ class Smart_Controller extends CI_Controller {
 	function smart_logout(){
 		//if (! $this->session->userdata('status')){redirect(base_url('admin/login'));}
 		$this->session->sess_destroy();
-		redirect(base_url('smart_controller/login'));
+		redirect(base_url('smart_controller/smart_login'));
 	}
 	
 	//------------------------------------------------------------

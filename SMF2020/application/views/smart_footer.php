@@ -1,9 +1,9 @@
 
         <!-- footer content -->
 		
-</script>
-        <footer>
-          <div class="text-center">
+
+        <footer >
+          <div class="text-center nav-menu">
             SMART FOUNDRY 2020 <a href="http://www.smartfoundry2020.in/">SmartFoundry2020</a>
           </div>
           <div class="clearfix"></div>
@@ -66,6 +66,6 @@
 	
 	<script src="<?php echo base_url();?>/assets/js/effect.js"></script>
     <script src="<?php echo base_url();?>/assets/js/custom.js"></script>
-	
+
   </body>
 </html>

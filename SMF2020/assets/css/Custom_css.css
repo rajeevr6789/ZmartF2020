@@ -1,3 +1,7 @@
+h2
+{
+overflow-wrap: break-word;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

@@ -79,7 +79,13 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Smart User</h2>
+                <?php
+				   if ($this->session->userdata('ses_status')== true)
+					{
+						$username_var=$this->session->userdata('ses_user_email');
+					}
+               ?>
+			  <h2 style="word-wrap: break-word;"><?php echo $username_var;?></h2> 
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -101,9 +107,9 @@
 					
                   </li>
 				  -->
-                  <li><a href="<?php echo base_url();?>smart_controller/smart_procdes_form">><i class="fa fa-edit"></i> View/Edit Values <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> View/Edit Values <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.php">Proc. Design and Simulation</a></li>
+                      <li><a href="<?php echo base_url();?>smart_controller/smart_procdes_form">Proc. Design and Simulation</a></li>
                       <li><a href="form.php">3D Printing</a></li>
                       <li><a href="form.php">Moulding</a></li>
                       <li><a href="form.php">Melting</a></li>
@@ -177,7 +183,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url();?>/assets/images/Logo.jpg" alt="">Smart User
+                    <img src="<?php echo base_url();?>/assets/images/Logo.jpg" alt=""><?php echo $username_var;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

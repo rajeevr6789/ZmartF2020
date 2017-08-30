@@ -1,7 +1,8 @@
 <?php
 class Smart_model extends CI_Model{
 	
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 						
 	}
@@ -42,9 +43,21 @@ class Smart_model extends CI_Model{
 	
 	//----------------------------------------------------------------------------------------------
 	
+	function add_form_data($table_name,$data_array)
+	{
+		//$data	=	array("usr_ass_br_id"=>$branch_id,"usr_ass_admins"=>$br_admins);
+		$result	=	$this->db->insert($table_name, $data_array); 
+		return $result;  
+	}
 
-
-
+	function select_form_data($table_name,$searchTerm)
+	{
+		$this->db->select('*');
+		$this->db->where('part_name', $searchTerm);
+		$query = $this->db->get($table_name);
+		return $query->row_array(); 	
+		
+	}
 }
 
 ?>

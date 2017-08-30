@@ -12,7 +12,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h4>Proc. Desig & Simulation</h4>
+              <h4>Process Design & Simulation</h4>
 			  <h2>Completed</h2>
             </div>
             <div class="icon">
@@ -111,17 +111,20 @@
 		$.ajax(
 		{
 			url: '<?php echo base_url();?>smart_controller/Get_chart_data',//live-server-data.php', // Calling the live-server-data.php which will give data for plotting in chart.
-			success: function(point) 
+			success: function(point1) 
 			{
 				//point contains the data passed from live-server-data.php
 				//alert(point);
+				point = JSON.parse(point1);
 				var series = chart.series[0];//Setting up the series of points to put in the charts.
 			
 				<?php //date_default_timezone_set('Asia/Kolkata');?>;									
 				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
-				var y = parseInt(point); // Setting up the y co-ordinate of the chart with point.
-				chart.series[0].addPoint([x, y], true, true); // Adding the [x,y] point to the chart
-				
+				var y1 = parseInt(point[0]); // Setting up the y co-ordinate of the chart with point.
+				var y2 = parseInt(point[1]); // Setting up the y co-ordinate of the chart with point.
+				//alert(point1);
+				chart.series[0].addPoint([x, y1], true, true); // Adding the [x,y] point to the chart
+				chart.series[1].addPoint([x, y2], true, true); // Adding the [x,y] point to the chart
 				// call it again after one second
 				setTimeout(requestData, 1000); // Setting the delay as 1 second
  
@@ -188,7 +191,28 @@
 			},
 			series: [
 			{
-				name: 'Data1',
+				name: 'Temperature',
+				color: '#FF0000',
+				data: (function () 
+				{
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime()+ 330*60*1000,
+						i;
+	
+					for (i = -19; i <= 0; i += 1) 
+					{
+						data.push(
+						{
+							x: time + i * 1000,
+							y: null
+						});
+					}
+					return data;
+				}())
+			},
+			{
+				name: 'Humidity',
 				color: '#3399FF',
 				data: (function () 
 				{

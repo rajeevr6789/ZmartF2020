@@ -1,10 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Smart_Controller extends CI_Controller {
+class Smart_Controller extends CI_Controller 
+{
 	
  private $module,$smart_login_table,$moduleID,$tablestudent,$tableteacher,$tableschool,$endrolled,$tableattend,$tableactivity,$tableslots,$module_name,$logged_in,$tableclass,$brn_ass,$pass=1234,$test_val;
+ 
+ public $part_name			=	 "",
+		$part_casting_metal	=	 "",
+		$part_surface_area	=	 "",
+		$part_weight		=	 "",
+		$part_volume		=	 "",
+		$mold_material		=	 "";
+		
+		
 	 
-	function __construct(){		
+	function __construct()
+	{		
 		
 		parent::__construct();
 		
@@ -22,7 +33,9 @@ class Smart_Controller extends CI_Controller {
 		$this->tablestudent	=	$this->module."_kids";
 		$this->tableclass	=	$this->module."_class";	
 		$this->test_val		=	10;	
-		$this->load->model('smart_model');			
+		$this->load->model('smart_model');		
+		$this->smart_form_table	=	"tbl_smart_form";	
+		
 	}
 	
 	//------------------------------------------------------------
@@ -50,9 +63,9 @@ class Smart_Controller extends CI_Controller {
 	 
 	function login_process()
 	{
-		$username							= $this->input->post('username');	
-		$password							= $this->input->post('password');
-		//$account							= $this->input->post('account');
+		$username				= $this->input->post('username');	
+		$password				= $this->input->post('password');
+		//$account				= $this->input->post('account');
 		
 		//if($username=="admin"&&$password=="1234")
 	//{
@@ -71,8 +84,8 @@ class Smart_Controller extends CI_Controller {
 	}
 	*/
 	
-	    $enpassword								= $this->en_de_password('encrypt',$password);
-		$loginArr['login']					= $this->smart_model->loginProcess($username,$enpassword,$this->smart_login_table);
+	    $enpassword				= $this->en_de_password('encrypt',$password);
+		$loginArr['login']		= $this->smart_model->loginProcess($username,$enpassword,$this->smart_login_table);
 		$this->session->set_userdata($loginArr['login']);
 		$this->session->set_userdata("ses_status",$loginArr['login']['status']);
 		$this->session->set_userdata("ses_user_id",$loginArr['login']['user_id']);
@@ -143,7 +156,6 @@ class Smart_Controller extends CI_Controller {
 		*@ return view to smart_dashboard
 	 */
 	 
-	 
 	 function Get_chart_data()
 	 {
 		 $y = $this->test_val;
@@ -168,13 +180,29 @@ class Smart_Controller extends CI_Controller {
 	{
     	list ($a,$b,$c,$d,$e,$f,$g) = $userinfo; // Putting the read datas to corresponding arrays.
 				
-			echo json_encode($a); // Passing required data to charts for displaying.
+			echo json_encode($userinfo); // Passing required data to charts for displaying.
 
 	};
 
 
 	fclose($handle); //closing the required file from file_close.php file
 	}
+	
+	
+	 
+	 //------------------------------------------------------------
+	 /**
+		*This temporary function is used to load smart procdes form
+		*@ access smart_controller
+		*@ return view to smart_procdes_form
+	 */
+	
+	
+	function smart_procdes_form()
+	{
+		$this->load->view('smart_procdes_form');
+	}
+	
 	
 	//------------------------------------------------------------
 	 /**
@@ -222,6 +250,133 @@ class Smart_Controller extends CI_Controller {
 	}
 	 
 	 
+	 //------------------------------------------------------------
+	 /**
+		*This function is used to insert details from form to table
+		*@ access subadmin
+		*@ return view to admin/subadmin listing page 
+	 */
+	 
+	 function form_to_table()
+	 {
+		
+		$part_name			=	 $this->input->post('part_name');
+		$part_casting_metal	=	 $this->input->post('part_casting_metal');
+		$part_surface_area	=	 $this->input->post('part_surface_area');
+		$part_weight		=	 $this->input->post('part_weight');
+		$part_volume		=	 $this->input->post('part_volume');
+		$mold_material		=	 $this->input->post('mold_material');
+		
+		$data = array(
+      					'part_name' => $part_name ,
+      					'part_casting_metal' => $part_casting_metal ,
+     					'part_surface_area' => $part_surface_area,
+						'part_weight' => $part_weight,
+						'part_volume' => $part_volume,
+						'mold_material' => $mold_material
+   				);
+
+		$this->smart_model->add_form_data($this->smart_form_table,$data);
+		redirect(base_url('smart_controller/smart_home'));	
+		 
+	 }
+	 
+	 
+	 //------------------------------------------------------------
+	 /**
+		*This function is used to retreive details from table to form
+		*@ access subadmin
+		*@ return view to admin/subadmin listing page 
+	 */
+	 //public $datas,$row;
+	 function table_to_form()
+	 {
+		
+//		$part_name			=	 $this->input->post('part_name');
+//		$part_casting_metal	=	 $this->input->post('part_casting_metal');
+//		$part_surface_area	=	 $this->input->post('part_surface_area');
+//		$part_weight		=	 $this->input->post('part_weight');
+//		$part_volume		=	 $this->input->post('part_volume');
+//		$mold_material		=	 $this->input->post('mold_material');
+		
+		$search_by_part_name=	 $this->input->post('search_by_part_name');
+		//echo $search_by_part_name;
+		//echo "hello";
+		//$datas = $this->smart_model->select_form_data($this->smart_form_table,$search_by_part_name);
+		$res_arr = array();
+		$newdata=0;
+		//$datas[0] = 'adarsh';
+		//echo "alert(".$search_by_part_name.");";
+		//$query = $this->db->query("SELECT * FROM $this->smart_form_table WHERE $search_by_part_name = part_name");  
+		$header['res_arr'] = $this->smart_model->select_form_data($this->smart_form_table,$search_by_part_name);
+		//print_r($header['res_arr']);
+		//$newdata=$header['res_arr']['part_name'];
+		//echo $newdata;
+		//print_r($header['res_arr']);
+		//echo $header['res_arr']['part_surface_area']; 
+		//die();
+		/*$query = $this->db->get($this->smart_form_table); 
+		$query= $this->db->select('*')->from($this->smart_form_table)->where('part_name =', $search_by_part_name)->get();
+		
+		"<script>
+			console.log(".$query.");
+		</script>";*/
+		//foreach ($res_arr as $row)  
+			//{  
+				//$this->output->get('part_name') = $row->part_name;
+				//$header['part_name'] 			= $res_arr->part_name;
+				//$header['part_casting_metal'] 	= $row->part_casting_metal;
+				//$header['part_surface_area'] 	= $row->part_surface_area;
+				//$header['part_weight']			= $row->part_weight;
+				//$header['part_volume'] 			= $row->part_volume;
+				//$header['mold_material'] 		= $row->mold_material;
+				//echo $header['part_name'];
+				//die();
+				//echo form_input('part_name', $row->part_name);
+//				echo form_input('part_casting_metal', $row->part_casting_metal);
+//				echo form_input('part_surface_area', $row->part_surface_area);
+//				echo form_input('part_weight', $row->part_weight);
+//				echo form_input('part_volume', $row->part_volume);
+//				echo form_input('mold_material', $row->mold_material);
+			//	$part_name 			= $row->part_name;
+//				$part_casting_metal 	= $row->part_casting_metal;
+//				$part_surface_area 	= $row->part_surface_area;
+//				$part_weight			= $row->part_weight;
+//				$part_volume 			= $row->part_volume;
+//				$mold_material 		= $row->mold_material;
+				
+				//echo form_input($row);
+				
+//				echo $row->part_name;  
+//				echo $row->part_casting_metal;  
+//				echo $row->part_surface_area;  
+//				echo $row->part_weight;  
+//				echo $row->part_volume;
+//				echo $row->mold_material;   
+				
+			//} 
+			
+			
+			$this->load->view('smart_procdes_form',$header);
+			//return $header;
+			//return $datas;
+		//$data1 = array(
+//      					'part_name' => $data[0] ,
+//      					'part_casting_metal' => $data[1] ,
+//     					'part_surface_area' => $data[2],
+//						'part_weight' => $data[3],
+//						'part_volume' => $data[4],
+//						'mold_material' => $data[5]
+//   				);
+		//$this->load->view('smart_procdes_form',$this->datas,FALSE);
+        	
+		 
+	 }
+	 function reset_form()
+	 {
+		 $header['res_arr']=NULL;
+	 }
+	 
 	//------------------------------------------------------------
 	 /**
 		*This function is used to recover_password
@@ -231,10 +386,7 @@ class Smart_Controller extends CI_Controller {
 	 
 	 //------------------------------------------------------------
 	 
-	 
-	 
-	 
-	 
+		 
 	function recover()
 	{ 
 		
@@ -242,9 +394,6 @@ class Smart_Controller extends CI_Controller {
 		$email=$this->input->post('mailid');
 		if(stripos($email,'@')&&stristr($email,'.')!==false)
 		{
-			
-			
-		
 		$account=$this->input->post('account');
 		$branch=$this->input->post('branch');
 		$branch= strtolower($branch);
@@ -292,9 +441,6 @@ class Smart_Controller extends CI_Controller {
 			
 			
             $user_email = $email;
-			
-			
-			
 			
 			/*$message = '<html>';
 		    $message.='<body style="font-family:Tahoma, Geneva, sans-serif !important; size:10px !important;">';

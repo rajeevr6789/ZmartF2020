@@ -14,13 +14,16 @@
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                   <form method="post" id="search_form" name="search_form"  action="<?php echo base_url();?>smart_controller/table_to_form">
+				  <div class="input-group">
+                    <input id="search_by_part_name" name="search_by_part_name" type="text" class="form-control" placeholder="Enter Part Name...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
+                      <button class="btn btn-default" type="submit" id="go" type="button" > Go!</button>
+
                     </span>
                   </div>
                 </div>
+				</form>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -28,7 +31,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Design <small>different form elements</small></h2>
+                    <h2>Data Form <small>different parameter values</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -48,69 +51,128 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+					<?php //foreach ($header as $item):?>
+                    <form method="post" id="data_form" name="data_form" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url();?>smart_controller/form_to_table">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="part_name">Part Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="part_name" name="part_name" value="<?php if (isset($res_arr)){echo $res_arr['part_name'];}//echo $part_name;//$header['part_name']; ?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="part_casting-metal">Casting Metal <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="part_casting_metal" name="part_casting_metal" value="<?php if (isset($res_arr)){echo $res_arr['part_casting_metal'];} ?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                        <label for="part_surface_area" class="control-label col-md-3 col-sm-3 col-xs-12">Part Surface Area<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+						<input id="part_surface_area" name="part_surface_area" class="form-control col-md-7 col-xs-12" type="text" name="part_surface_area" value="<?php 
+						if (isset($res_arr))
+						{echo $res_arr['part_surface_area'];
+						} ?>" required="required">
                         </div>
                       </div>
+                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                            </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="female"> Female
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Part Weight <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                          <input id="part_weight" name="part_weight" class="form-control col-md-7 col-xs-12" value="<?php if (isset($res_arr)){echo $res_arr['part_weight'];}?>" required="required" type="text">
                         </div>
                       </div>
+					  
+					  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Part Volume <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="part_volume" name="part_volume" class="form-control col-md-7 col-xs-12" value="<?php if (isset($res_arr)){echo $res_arr['part_volume']; }?>" required="required" type="text">
+                        </div>
+                      </div>
+					  
+					  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mold Material <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="mold_material" name="mold_material" class="form-control col-md-7 col-xs-12" value="<?php if (isset($res_arr)){echo $res_arr['mold_material'];} ?>" required="required" type="text">
+                        </div>
+                      </div>
+					  
+					  
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success">Submit</button>
+                          <button class="btn btn-primary" id="cancel" type="button" action="<?php echo base_url();?>smart_controller/smart_dashboard">Cancel</button>
+						  <button class="btn btn-primary" id="reset_form" type="button">Reset</button>
+                          <button type="submit" class="btn btn-success" >Submit</button>
                         </div>
                       </div>
 
                     </form>
+					<?php //endforeach;?>
                   </div>
                 </div>
               </div>
             </div>
 			
-
+			
             
           </div>
         </div>
         <!-- /page content -->
+		
+		<script>
+		$("#go1").on('click', function() {
+    //alert($("#search_by_part_name").val());
+	
+	$.ajax({
+        url: '<?php echo base_url();?>smart_controller/table_to_form',
+        type: 'POST',
+        data: {
+            search_by_part_name: $("#search_by_part_name").val()
+        },
+		dataType: "html",
+		success: function(html) {
+            alert(html);
+			//document.location.href = "<?php //echo base_url()?>smart_controller/smart_procdes_form";
+        }
+        
+    });
+});
 
+	
+</script>
+
+<script>
+
+$("#reset_form").on('click', function() 
+{
+	
+		//alert("hey");
+		//$("#data_form")[0].reset();
+		$('#part_name').val('');
+		$('#part_casting_metal').val('');
+		$('#part_surface_area').val('');
+		$('#part_weight').val('');
+		$('#part_volume').val('');
+		$('#mold_material').val('');
+				
+	});
+	
+</script>
+<script>
+
+$("#cancel").on('click', function() 
+{
+	document.location.href = "<?php echo base_url()?>smart_controller/smart_home";
+				
+});
+	
+</script>
       <!--Calling footer content-->
 	<?php include('smart_footer.php');?>
 		

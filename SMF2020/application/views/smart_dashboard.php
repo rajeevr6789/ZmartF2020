@@ -115,13 +115,14 @@
 			{
 				//point contains the data passed from live-server-data.php
 				
-				//alert(point[1]);
+				//alert(point1);
 				point = JSON.parse(point1);
 				var series = chart.series[0];//Setting up the series of points to put in the charts.
 			
 				<?php //date_default_timezone_set('Asia/Kolkata');?>;									
 				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
-
+				//alert(point[0]);
+				//alert(point[1]);
 				var y1 = parseInt(point[0]); // Setting up the y co-ordinate of the chart with point.
 				var y2 = parseInt(point[1]); // Setting up the y co-ordinate of the chart with point.
 				chart.series[0].addPoint([x, y1], true, true); // Adding the [x,y] point to the chart
@@ -319,12 +320,24 @@
         
           <div class="row">
           <div class="col-md-6 col-sm-12 col-xs-12">
+
+        <!--  <div id="container-speed" class = "highcharts" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+
+          <div id="container-speed" style=" min-width: 250px; height: 220px; margin: 0 auto" >-->
+
           <div id="container-speed" class="highcharts-pane-group-new" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+
 			</div>	
           
           </div>
            <div class="col-md-6 col-sm-12 col-xs-12">
+
+        <!--  <div id="container-rpm" class= "highcharts" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+
+          <div id="container-rpm" style=" min-width: 250px; height: 220px; margin: 0 auto" >-->
+
           <div id="container-rpm" class="highcharts-pane-group-new" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+
 			</div>	
           
           </div>

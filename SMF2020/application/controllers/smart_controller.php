@@ -174,12 +174,39 @@ class Smart_Controller extends CI_Controller
 	
 	$file = 'C:/Users/Public/Documents/datafile.txt'; // Setting the path of data file.
 	$handle = fopen("C:/Users/Public/Documents/datafile.txt", "r"); // opening the required file from file_open.php file
-
-	$pos = sizeof($handle) - 25;// Setting the position of the file pointer for reading the last updated values in the file.
-	fseek($handle, $pos, SEEK_END);
+	$line = '';
+	$pos = -1;//sizeof($handle) - 25;// Setting the position of the file pointer for reading the last updated values in the file.
+	$c = '';
+	fseek($handle, $pos--, SEEK_END);
+		
+	$c = fgetc($handle);
 	
+	while($c == "\n" || $c == "\r")
+	{
+		fseek($handle, $pos--, SEEK_END);
+		
+		$c = fgetc($handle);
+		//print_r($c);
+	};
+	
+	/**
+ 	* Read until the start of file or first newline char
+ 	*/
+	while ($c !== false && $c !== "\n" && $c !== "\r") 
+	{
+   		 /**
+   		  * Prepend the new char
+    	 */
+		
+   		$line = $c . $line;
+    	fseek($handle, $pos--, SEEK_END);
+    	$c = fgetc($handle);
+	};
+	$last_line = explode("\t",$line);
+	
+	echo json_encode($last_line);
 
-	$userinfo = fscanf($handle,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n"); // Read contents of file
+	/*$userinfo = fscanf($handle,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n"); // Read contents of file
 	//$userinfo = fscanf($handle,"%s\t%s\n"); // Read contents of file
 
 	{
@@ -194,7 +221,7 @@ class Smart_Controller extends CI_Controller
 			echo json_encode($userinfo); // Passing required data to charts for displaying.
 
 			
-	}
+	}*/
 
 
 	fclose($handle); //closing the required file from file_close.php file

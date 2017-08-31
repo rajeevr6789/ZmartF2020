@@ -123,8 +123,8 @@
 				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
 				//alert(point[0]);
 				//alert(point[1]);
-				var y1 = parseInt(point[0]); // Setting up the y co-ordinate of the chart with point.
-				var y2 = parseInt(point[1]); // Setting up the y co-ordinate of the chart with point.
+				var y1 = parseFloat(point[0]); // Setting up the y co-ordinate of the chart with point.
+				var y2 = parseFloat(point[1]); // Setting up the y co-ordinate of the chart with point.
 				chart.series[0].addPoint([x, y1], true, true); // Adding the [x,y] point to the chart
 				chart.series[1].addPoint([x, y2], true, true); // Adding the [x,y] point to the chart
 				

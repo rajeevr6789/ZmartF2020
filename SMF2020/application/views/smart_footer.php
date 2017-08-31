@@ -1,18 +1,20 @@
 
-        <!-- footer content -->
-		
-
-        <footer >
-          <div class="text-center nav-menu">
+       
+	  <!--closing 1st and 2nd div from header-->
+       
+	  </div>
+      </div>
+     <!-- footer content -->
+		<!--<div class="footer tile_count">-->
+    
+        <footer class="smart_footer">
+          <div class="text-center">
             SMART FOUNDRY 2020 <a href="http://www.smartfoundry2020.in/">SmartFoundry2020</a>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-      
-	  <!--closing 1st and 2nd div from header-->
-	  </div>
-    </div>
+      <!--</div>-->
 	<!-- jQuery -->
 	<!--<script src="<?php /*?><?php echo base_url();?><?php */?>/assets/js/jquery.min.js"></script>-->
 	

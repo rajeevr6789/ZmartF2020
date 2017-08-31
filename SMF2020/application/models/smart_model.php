@@ -58,6 +58,13 @@ class Smart_model extends CI_Model{
 		return $query->row_array(); 	
 		
 	}
+	
+	function smart_procdes_form_update($table_name,$form_array,$id) {
+		
+		$this->db->where('part_id', $id);
+		$result	=	$this->db->update($table_name,$form_array); 
+		return $result;
+	}
 }
 
 ?>

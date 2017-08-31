@@ -89,11 +89,11 @@
                   </div>
                 </div>
 
-                <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="col-md-9 col-sm-12 col-xs-12 highcharts-hover">
 
 				
 <!-------------------------------------------------------------------------- Begin RealTime Flot Graph------------------------------------------------------------------------------------------------->
-	<div id="container" style=" min-width: 310px; height: 400px; margin: 0 auto" >
+	<div id="container" class="highcharts-hover" style=" min-width: 310px; height: 400px; margin: 0 auto" >
 			
 			</div>	
     <script>
@@ -114,19 +114,23 @@
 			success: function(point1) 
 			{
 				//point contains the data passed from live-server-data.php
-				//alert(point);
+				
+				//alert(point[1]);
 				point = JSON.parse(point1);
 				var series = chart.series[0];//Setting up the series of points to put in the charts.
 			
 				<?php //date_default_timezone_set('Asia/Kolkata');?>;									
 				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
+
 				var y1 = parseInt(point[0]); // Setting up the y co-ordinate of the chart with point.
 				var y2 = parseInt(point[1]); // Setting up the y co-ordinate of the chart with point.
-				//alert(point1);
 				chart.series[0].addPoint([x, y1], true, true); // Adding the [x,y] point to the chart
 				chart.series[1].addPoint([x, y2], true, true); // Adding the [x,y] point to the chart
+				
+
+				
 				// call it again after one second
-				setTimeout(requestData, 1000); // Setting the delay as 1 second
+				setTimeout(requestData, 2000); // Setting the delay as 1 second
  
 			},
 			cache: false
@@ -191,6 +195,7 @@
 			},
 			series: [
 			{
+
 				name: 'Temperature',
 				color: '#FF0000',
 				data: (function () 
@@ -211,8 +216,11 @@
 					return data;
 				}())
 			},
+			
+	
 			{
 				name: 'Humidity',
+
 				color: '#3399FF',
 				data: (function () 
 				{
@@ -231,7 +239,11 @@
 					}
 					return data;
 				}())
-			}]
+			}
+			
+			
+			
+			]
 		});
 	});
 		
@@ -253,15 +265,15 @@
                   </div>
 
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div>
-                      <p>Process Design</p>
+                    <div class="progress-hover">
+                      <p class="">Process Design</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 100%;">
                           <div class="progress-bar bg-blue" role="progressbar" data-transitiongoal="100"></div>
                         </div>
                       </div>
                     </div>
-                    <div>
+                    <div class="progress-hover">
                       <p>3D Printing</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 100%;">
@@ -270,8 +282,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="progress-hover">
                       <p>Molding</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 100%;">
@@ -279,7 +291,7 @@
                         </div>
                       </div>
                     </div>
-                    <div>
+                    <div class="progress-hover">
                       <p>Melting</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 100%;">
@@ -307,12 +319,12 @@
         
           <div class="row">
           <div class="col-md-6 col-sm-12 col-xs-12">
-          <div id="container-speed" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+          <div id="container-speed" class="highcharts-pane-group-new" style=" min-width: 250px; height: 220px; margin: 0 auto" >
 			</div>	
           
           </div>
            <div class="col-md-6 col-sm-12 col-xs-12">
-          <div id="container-rpm" style=" min-width: 250px; height: 220px; margin: 0 auto" >
+          <div id="container-rpm" class="highcharts-pane-group-new" style=" min-width: 250px; height: 220px; margin: 0 auto" >
 			</div>	
           
           </div>
@@ -1100,19 +1112,23 @@ setInterval(function () {
             </div>
 			-->
             
-       
+         <!--Seperation-->
+          
         
-		
-            
+		<!--</div>
+       <div class="row tile_count">-->
+          
+          
           </div>
             
         
          
-        </div>
+       </div>
        
   <!-------------------------------------------------------------------------- End RealTime Guage Graph------------------------------------------------------------------------------------------------->      
        
 	   <!-- /page content -->
+       
        
 		<!--Calling footer content-->
 	<?php $this->load->view('smart_footer');?>

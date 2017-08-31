@@ -5,12 +5,7 @@ class Smart_Controller extends CI_Controller
 	
  private $module,$smart_login_table,$moduleID,$tablestudent,$tableteacher,$tableschool,$endrolled,$tableattend,$tableactivity,$tableslots,$module_name,$logged_in,$tableclass,$brn_ass,$pass=1234,$test_val;
  
- public $part_name			=	 "",
-		$part_casting_metal	=	 "",
-		$part_surface_area	=	 "",
-		$part_weight		=	 "",
-		$part_volume		=	 "",
-		$mold_material		=	 "";
+
 		
 		
 	 
@@ -141,7 +136,7 @@ class Smart_Controller extends CI_Controller
 		
 		{
 			$this->session->set_flashdata('err', 'Please Log in to continue');
-			redirect(base_url('smart_controller/login'));
+			redirect(base_url('smart_controller/smart_login'));
 				
 		}
 		$errmessages			=	array();
@@ -158,6 +153,15 @@ class Smart_Controller extends CI_Controller
 	 
 	 function Get_chart_data()
 	 {
+		 
+		 if (!$this->session->userdata('ses_status'))
+		
+		{
+			$this->session->set_flashdata('err', 'Please Log in to continue');
+			redirect(base_url('smart_controller/smart_login'));
+				
+		}
+		 
 		 $y = $this->test_val;
 		 $y+=10;
 		 //$y+=10;
@@ -171,18 +175,26 @@ class Smart_Controller extends CI_Controller
 	$file = 'C:/Users/Public/Documents/datafile.txt'; // Setting the path of data file.
 	$handle = fopen("C:/Users/Public/Documents/datafile.txt", "r"); // opening the required file from file_open.php file
 
-	$pos = sizeof($handle) - 23;// Setting the position of the file pointer for reading the last updated values in the file.
+	$pos = sizeof($handle) - 25;// Setting the position of the file pointer for reading the last updated values in the file.
 	fseek($handle, $pos, SEEK_END);
+	
 
-	$userinfo = 
-	fscanf($handle,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n"); // Read contents of file
+	$userinfo = fscanf($handle,"%f\t%f\t%f\t%f\t%f\t%f\t%f\n"); // Read contents of file
+	//$userinfo = fscanf($handle,"%s\t%s\n"); // Read contents of file
 
 	{
     	list ($a,$b,$c,$d,$e,$f,$g) = $userinfo; // Putting the read datas to corresponding arrays.
+		//list ($a,$b) = $userinfo; // Putting the read datas to corresponding arrays.
 				
+
+			if(is_null($a))
+			{
+			$a=0;
+			}
 			echo json_encode($userinfo); // Passing required data to charts for displaying.
 
-	};
+			
+	}
 
 
 	fclose($handle); //closing the required file from file_close.php file
@@ -200,6 +212,13 @@ class Smart_Controller extends CI_Controller
 	
 	function smart_procdes_form()
 	{
+			if (!$this->session->userdata('ses_status'))
+		
+		{
+			$this->session->set_flashdata('err', 'Please Log in to continue');
+			redirect(base_url('smart_controller/smart_login'));
+				
+		}
 		$this->load->view('smart_procdes_form');
 	}
 	
@@ -260,12 +279,24 @@ class Smart_Controller extends CI_Controller
 	 function form_to_table()
 	 {
 		
+		if (!$this->session->userdata('ses_status'))
+		
+		{
+			$this->session->set_flashdata('err', 'Please Log in to continue');
+			redirect(base_url('smart_controller/smart_login'));
+				
+		}
+		$data =array();
+		$header['res_arr'] =array();
 		$part_name			=	 $this->input->post('part_name');
 		$part_casting_metal	=	 $this->input->post('part_casting_metal');
 		$part_surface_area	=	 $this->input->post('part_surface_area');
 		$part_weight		=	 $this->input->post('part_weight');
 		$part_volume		=	 $this->input->post('part_volume');
 		$mold_material		=	 $this->input->post('mold_material');
+		$part_id			=	 $this->input->post('part_id');
+		$header['res_arr'] = $this->smart_model->select_form_data($this->smart_form_table,$part_name);
+		$table_part_name=$header['res_arr']['part_name'];
 		
 		$data = array(
       					'part_name' => $part_name ,
@@ -275,8 +306,23 @@ class Smart_Controller extends CI_Controller
 						'part_volume' => $part_volume,
 						'mold_material' => $mold_material
    				);
-
-		$this->smart_model->add_form_data($this->smart_form_table,$data);
+		if($part_id==0)
+		{
+		if($part_name===$table_part_name)
+		{
+		$this->session->set_flashdata('err', 'Part name already exists');
+		redirect(base_url('smart_controller/smart_procdes_form'));	
+			
+		}	
+		$this->smart_model->add_form_data($this->smart_form_table,$data);//Insert data
+		}
+		else
+		{
+			
+			$this->smart_model->smart_procdes_form_update($this->smart_form_table,$data,$part_id);//Update data
+			
+			
+		}
 		redirect(base_url('smart_controller/smart_home'));	
 		 
 	 }
@@ -372,10 +418,7 @@ class Smart_Controller extends CI_Controller
         	
 		 
 	 }
-	 function reset_form()
-	 {
-		 $header['res_arr']=NULL;
-	 }
+	 
 	 
 	//------------------------------------------------------------
 	 /**

@@ -171,6 +171,7 @@
             <!-- /menu footer buttons -->
           </div>
         </div>
+        <!--</li>--><!--new-->
 
         <!-- top navigation -->
         <div class="top_nav">
@@ -262,6 +263,16 @@
                       </div>
                     </li>
                   </ul>
+                </li>
+                <!---------------------------Google Translator Plugin----------------------------->
+                <li>
+                	<div class="text-center">
+                	<div id="google_translate_element"></div><script type="text/javascript">
+				function googleTranslateElementInit() {
+  				new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+				}
+				</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+             	</div>
                 </li>
               </ul>
             </nav>

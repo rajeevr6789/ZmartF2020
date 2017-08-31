@@ -1,26 +1,183 @@
-h2
-{
-overflow-wrap: break-word;
-}
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
-td, th {
-    border: 0.5px solid #000;
-    text-align: left;
-    padding: 8px;
-	word-break: break-all;
+@-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    } 
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
 }
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+h2{
+		overflow-wrap: break-word;
+		}
+
+table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		}	
+td, th {
+	    border: 0.5px solid #000;
+	    text-align: left;
+	    padding: 8px;
+		word-break: break-all;
+		}
 
 td:nth-child(2n) {
-    background-color: #FFF;
-	text-align: center;
-}
+    	background-color: #FFF;
+		text-align: center;
+		}
 td:nth-child(2n+1) {
-	font-weight: bold;
-	font-weight: 700;
-	font-size:16px;
-}
+		font-weight: bold;
+		font-weight: 700;
+		font-size:16px;
+		}
+div.goog-te-gadget-simple{
+		border-radius:5px;
+		background :grey;
+		margin-top:18px;
+		}
+a.goog-te-menu-value {
+		text-decoration:none;
+		}
+a.goog-te-menu-value >span{
+		color: yellow;
+		}
+.small-box:hover{
+		text-shadow:5px 5px 3px black;
+	 	box-shadow: 10px 10px 5px grey;
+	 	-webkit-transform: scale(1.03);
+     	-ms-transform: scale(1.03);
+     	transform: scale(1.03);
+		}
+.small-box{
+		-webkit-transition-duration: 0.5s; /* Safari */
+    	transition-duration: 0.5s;
+		text-align:center;
+		border: 15px;
+		border-color: black;
+		border-radius: 10px;
+		}
+.progress-hover:hover{
+		box-shadow: 5px 5px 3px grey;
+		-webkit-transform: scale(1.1);
+    	-ms-transform: scale(1.1);
+    	transform: scale(1.1);	
+		font-size:large;
+		}
+.progress-hover{
+		-webkit-transition-duration: 0.5s; /* Safari */
+    	transition-duration: 0.5s;
+		}
+.highcharts-pane-group-old:hover
+{
+        /*-webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+		
+		box-shadow: 5px 5px 3px grey;
+		-webkit-transform: scale(1.1);
+    	-ms-transform: scale(1.1);
+    	transform: scale(1.1);	
+		font-size:large;
+		*/
+		}
+		
+		.highcharts-pane-group-new:hover
+{
+        -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+		
+		/*box-shadow: 5px 5px 3px grey;
+		-webkit-transform: scale(1.1);
+    	-ms-transform: scale(1.1);
+    	transform: scale(1.1);	
+		font-size:large;
+		*/
+		}
+		
+		.highcharts-hover:hover
+{
+        -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+		}
+.site_title:hover{
+	   -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+        }
+		.smart_footer{
+	   
+	   background-color:#CCC;
+        }
+		.error_alert1
+		{
+			background-color:#F00;!important;
+			
+			color:#F00;
+		}
+        

@@ -1,16 +1,19 @@
 
        
 	  <!--closing 1st and 2nd div from header-->
-       
+    
 	  </div>
       </div>
      <!-- footer content -->
 		<!--<div class="footer tile_count">-->
     
         <footer class="smart_footer">
-          <div class="text-center">
+          <div class="col-md-10">
             SMART FOUNDRY 2020 <a href="http://www.smartfoundry2020.in/">SmartFoundry2020</a>
           </div>
+          <div class="col-md-2 pull-right">
+		  VISITOR COUNT : <?php if(isset($user_data)) echo $user_data;?>
+		 </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->

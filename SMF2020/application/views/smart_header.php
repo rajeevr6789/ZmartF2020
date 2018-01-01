@@ -52,6 +52,10 @@
 	<link href="<?php echo base_url();?>/assets/css/Custom_css.css" rel="stylesheet">
 		<!-- jQuery -->
 	<script src="<?php echo base_url();?>/assets/js/jquery.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/loader.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/stl.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/threemin.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/TrackballControls.js"></script>
 	<!-- Custom script -->
 	<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/assets/payloads/highcharts.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/assets/payloads/exporting.js"></script>

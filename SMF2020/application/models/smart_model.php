@@ -65,6 +65,28 @@ class Smart_model extends CI_Model{
 		$result	=	$this->db->update($table_name,$form_array); 
 		return $result;
 	}
+	
+	
+	function getCount($userIP)
+	{
+		/*SELECT    * FROM      tbl_user_count ORDER BY  Ucount DESC LIMIT     1;*/
+		//$this->db->select('Ucount');
+		$this->db->select('*');
+		$this->db->where('Ipaddress', $userIP);
+		$query = $this->db->get('tbl_user_count');
+		if ($query->row_array() == 0 )
+		{
+			$datarr = array ("Ipaddress"=>$userIP);
+			$result	=	$this->db->insert('tbl_user_count',$datarr); 
+		}
+		$this->db->select('Ucount');
+		$que = $this->db->get('tbl_user_count');
+		//$que= $this->db->query("SELECT Ucount FROM tbl_user_count;");
+		//$query = $this->db->get('tbl_user_count');
+		//$finalresult = $que->row_array();
+		return $que->num_rows();
+	}
+
 }
 
 ?>

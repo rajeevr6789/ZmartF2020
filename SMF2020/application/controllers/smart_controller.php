@@ -141,7 +141,11 @@ class Smart_Controller extends CI_Controller
 		}
 		$errmessages			=	array();
 		$errmessages['login']	=	$this->session->flashdata('err');
-		$this->load->view('smart_dashboard');
+		$userIP = $this->input->ip_address();
+		$header['user_data']		=	0;
+		$header['user_data'] = $this->smart_model->getCount($userIP);
+		//echo "User count is";
+		$this->load->view('smart_dashboard',$header);
 	}
 	
 	
@@ -172,8 +176,8 @@ class Smart_Controller extends CI_Controller
 		 	// Set the JSON header
 	//header("Content-type: text/json");
 	
-	$file = 'C:/Users/Public/Documents/datafile.txt'; // Setting the path of data file.
-	$handle = fopen("C:/Users/Public/Documents/datafile.txt", "r"); // opening the required file from file_open.php file
+	$file = 'C:/Users/Public/Documents/datafilecsv.csv'; // Setting the path of data file.
+	$handle = fopen("C:/Users/Public/Documents/datafilecsv.csv", "r"); // opening the required file from file_open.php file
 	$line = '';
 	$pos = -1;//sizeof($handle) - 25;// Setting the position of the file pointer for reading the last updated values in the file.
 	$c = '';
@@ -202,7 +206,7 @@ class Smart_Controller extends CI_Controller
     	fseek($handle, $pos--, SEEK_END);
     	$c = fgetc($handle);
 	};
-	$last_line = explode("\t",$line);
+	$last_line = explode(",",$line);
 	
 	echo json_encode($last_line);
 
@@ -246,7 +250,12 @@ class Smart_Controller extends CI_Controller
 			redirect(base_url('smart_controller/smart_login'));
 				
 		}
-		$this->load->view('smart_procdes_form');
+		
+		$userIP = $this->input->ip_address();
+		$header['user_data']		=	0;
+		$header['user_data'] = $this->smart_model->getCount($userIP);
+		//echo "User count is";
+		$this->load->view('smart_procdes_form',$header);
 	}
 	
 	
@@ -350,7 +359,16 @@ class Smart_Controller extends CI_Controller
 			
 			
 		}
-		redirect(base_url('smart_controller/smart_home'));	
+		
+		$userIP = $this->input->ip_address();
+		$header['user_data']		=	0;
+		$header['user_data'] = $this->smart_model->getCount($userIP);
+		echo "User count is";
+		//echo $header['user_data'];
+		//die();	
+		$this->load->view('smart_procdes_form',$header);
+		
+		//redirect(base_url('smart_controller/smart_home'));	
 		 
 	 }
 	 
@@ -371,7 +389,13 @@ class Smart_Controller extends CI_Controller
 //		$part_weight		=	 $this->input->post('part_weight');
 //		$part_volume		=	 $this->input->post('part_volume');
 //		$mold_material		=	 $this->input->post('mold_material');
+		if (!$this->session->userdata('ses_status'))
 		
+		{
+			$this->session->set_flashdata('err', 'Please Log in to continue');
+			redirect(base_url('smart_controller/smart_login'));
+				
+		}
 		$search_by_part_name=	 $this->input->post('search_by_part_name');
 		//echo $search_by_part_name;
 		//echo "hello";
@@ -429,7 +453,9 @@ class Smart_Controller extends CI_Controller
 				
 			//} 
 			
-			
+			$userIP = $this->input->ip_address();
+			$header['user_data']		=	0;
+			$header['user_data'] = $this->smart_model->getCount($userIP);
 			$this->load->view('smart_procdes_form',$header);
 			//return $header;
 			//return $datas;

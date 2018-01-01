@@ -3,6 +3,8 @@
 	
 	<?php include('smart_header.php');?>
 
+	
+
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -121,6 +123,14 @@
               </div>
             </div>
 			
+			
+			
+			<div>
+select stl file: <input type="file" id="file" /> or drop stl file
+</div>
+<div id="view">
+<!--<canvas width="1019" height="719" style="width: 800px; height: 800px;"></canvas>-->
+</div>
 			
             
           </div>

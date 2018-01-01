@@ -117,12 +117,18 @@
 				
 				//alert(point1);
 				point = JSON.parse(point1);
+				//var csvsplit=point;//.split(',');
+				//var tempcsv=csvsplit[0];
+				//alert(tempcsv);
 				var series = chart.series[0];//Setting up the series of points to put in the charts.
-			
+				//alert(point);
 				<?php //date_default_timezone_set('Asia/Kolkata');?>;									
 				var x = (new Date()).getTime()+ 330*60*1000; // Setting up the x co-ordinate of the chart with current time.
-				//alert(point[0]);
-				//alert(point[1]);
+				//point = explode
+				//alert(point);
+				
+				//alert(point[2]);
+				
 				var y1 = parseFloat(point[0]); // Setting up the y co-ordinate of the chart with point.
 				var y2 = parseFloat(point[1]); // Setting up the y co-ordinate of the chart with point.
 				chart.series[0].addPoint([x, y1], true, true); // Adding the [x,y] point to the chart
@@ -160,7 +166,7 @@
 			},
 			
 			title: {
-				text: 'Live data From File'
+				text: 'Real Time Temperature and Humidity'
 			},
 			 credits: {
                 enabled:true,
@@ -404,7 +410,7 @@ var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptio
         min: 0,
         max: 200,
         title: {
-            text: 'Speed'
+            text: 'Heat change'
         }
     },
 
@@ -413,15 +419,15 @@ var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptio
     },
 
     series: [{
-        name: 'Speed',
+        name: 'Heat change',
         data: [80],
         dataLabels: {
             format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                   '<span style="font-size:12px;color:silver">km/h</span></div>'
+                   '<span style="font-size:12px;color:silver">degree</span></div>'
         },
         tooltip: {
-            valueSuffix: ' km/h'
+            valueSuffix: 'degree'
         }
     }]
 
@@ -431,24 +437,24 @@ var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptio
 var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
-        max: 5,
+        max: 100,
         title: {
-            text: 'RPM'
+            text: 'Humidity change'
         }
     },
 credits: {
         enabled: false
     },
     series: [{
-        name: 'RPM',
+        name: 'Humidity change',
         data: [1],
         dataLabels: {
             format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                   '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+                   '<span style="font-size:12px;color:silver">percent</span></div>'
         },
         tooltip: {
-            valueSuffix: ' revolutions/min'
+            valueSuffix: 'percent'
         }
     }]
 
@@ -476,10 +482,10 @@ setInterval(function () {
     // RPM
     if (chartRpm) {
         point = chartRpm.series[0].points[0];
-        inc = Math.random() - 0.5;
+        inc = (Math.random() - 0.5)*100;
         newVal = point.y + inc;
 
-        if (newVal < 0 || newVal > 5) {
+        if (newVal < 0 || newVal > 100) {
             newVal = point.y - inc;
         }
 
